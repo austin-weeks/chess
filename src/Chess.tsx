@@ -19,4 +19,5 @@ function Square({ isBlack, id }: square) {
     );
 }
 
+
 export default Chess;
