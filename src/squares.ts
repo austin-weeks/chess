@@ -1,263 +1,328 @@
 export interface square {
     isBlack: boolean
-    id: string
+    row: number,
+    col: number
 }
 export const boardArr: square[] = [
     {
         isBlack: false,
-        id: "8a"
+        row: 8,
+        col: 1
     },
     {
         isBlack: true,
-        id: "8b"
+        row: 8,
+        col: 2
     },
     {
         isBlack: false,
-        id: "8c"
+        row: 8,
+        col: 3
     },
     {
         isBlack: true,
-        id: "8d"
+        row: 8,
+        col:4
     },
 
     {
         isBlack: false,
-        id: "8e"
+        row: 8,
+        col: 5
     },
     {
         isBlack: true,
-        id: "8f"
+        row: 8,
+        col: 6
     },
     {
         isBlack: false,
-        id: "8g"
+        row: 8,
+        col: 7
     },
     {
         isBlack: true,
-        id: "8h"
+        row: 8,
+        col: 8
     },
     {
         isBlack: true,
-        id: "7a"
+        row: 7,
+        col: 1
     },
     {
         isBlack: false,
-        id: "7b"
+        row: 7,
+        col: 2
     },
     {
         isBlack: true,
-        id: "7c"
+        row: 7,
+        col: 3
     },
     {
         isBlack: false,
-        id: "7d"
+        row: 7,
+        col: 4
     },
     {
         isBlack: true,
-        id: "7e"
+        row: 7,
+        col: 5
     },
     {
         isBlack: false,
-        id: "7f"
+        row: 7,
+        col: 6
     },
     {
         isBlack: true,
-        id: "7g"
+        row: 7,
+        col: 7
     },
     {
         isBlack: false,
-        id: "7h"
+        row: 7,
+        col: 8
     },
     {
         isBlack: false,
-        id: "6a"
+        row: 6,
+        col: 1
     },
     {
         isBlack: true,
-        id: "6b"
+        row: 6,
+        col: 2
     },
     {
         isBlack: false,
-        id: "6c"
+        row: 6,
+        col: 3
     },
     {
         isBlack: true,
-        id: "6d"
+        row: 6,
+        col: 4
     },
     {
         isBlack: false,
-        id: "6e"
+        row: 6,
+        col: 5
     },
     {
         isBlack: true,
-        id: "6f"
+        row: 6,
+        col: 6
     },
     {
         isBlack: false,
-        id: "6g"
+        row: 6,
+        col: 7
     },
     {
         isBlack: true,
-        id: "6h"
+        row: 6,
+        col: 8
     },
     {
         isBlack: true,
-        id: "5a"
+        row: 5,
+        col: 1
     },
     {
         isBlack: false,
-        id: "5b"
+        row: 5,
+        col: 2
     },
     {
         isBlack: true,
-        id: "5c"
+        row: 5,
+        col: 3
     },
     {
         isBlack: false,
-        id: "5d"
+        row: 5,
+        col: 4
     },
     {
         isBlack: true,
-        id: "5e"
+        row: 5,
+        col: 5
     },
     {
         isBlack: false,
-        id: "5f"
+        row: 5,
+        col: 6
     },
     {
         isBlack: true,
-        id: "5g"
+        row: 5,
+        col: 7
     },
     {
         isBlack: false,
-        id: "5h"
+        row: 5,
+        col: 8
     },
     {
         isBlack: false,
-        id: "4a"
+        row: 4,
+        col: 1
     },
     {
         isBlack: true,
-        id: "4b"
+        row: 4,
+        col: 2
     },
     {
         isBlack: false,
-        id: "4c"
+        row: 4,
+        col: 3
     },
     {
         isBlack: true,
-        id: "4d"
+        row: 4,
+        col: 4
     },
     {
         isBlack: false,
-        id: "4e"
+        row: 4,
+        col: 5
     },
     {
         isBlack: true,
-        id: "4f"
+        row: 4,
+        col: 6
     },
     {
         isBlack: false,
-        id: "4g"
+        row: 4,
+        col: 7
     },
     {
         isBlack: true,
-        id: "4h"
+        row: 4,
+        col: 8
     },
     {
         isBlack: true,
-        id: "3a"
+        row: 3,
+        col: 1
     },
     {
         isBlack: false,
-        id: "3b"
+        row: 3,
+        col: 2
     },
     {
         isBlack: true,
-        id: "3c"
+        row: 3,
+        col: 3
     },
     {
         isBlack: false,
-        id: "3d"
+        row: 3,
+        col: 4
     },
     {
         isBlack: true,
-        id: "3e"
+        row: 3,
+        col: 5
     },
     {
         isBlack: false,
-        id: "3f"
+        row: 3,
+        col: 6
     },
     {
         isBlack: true,
-        id: "3g"
+        row: 3,
+        col: 7
     },
     {
         isBlack: false,
-        id: "3h"
+        row: 3,
+        col: 8
     },
     {
         isBlack: false,
-        id: "2a"
+        row: 2,
+        col: 1
     },
     {
         isBlack: true,
-        id: "2b"
+        row: 2,
+        col: 2
     },
     {
         isBlack: false,
-        id: "2c"
+        row: 2,
+        col: 3
     },
     {
         isBlack: true,
-        id: "2d"
+        row: 2,
+        col: 4
     },
     {
         isBlack: false,
-        id: "2e"
+        row: 2,
+        col: 5
     },
     {
         isBlack: true,
-        id: "2f"
+        row: 2,
+        col: 6
     },
     {
         isBlack: false,
-        id: "2g"
+        row: 2,
+        col: 7
     },
     {
         isBlack: true,
-        id: "2h"
+        row: 2,
+        col: 8
     },
     {
         isBlack: true,
-        id: "1a"
+        row: 1,
+        col: 1
     },
     {
         isBlack: false,
-        id: "1b"
+        row: 1,
+        col: 2
     },
     {
         isBlack: true,
-        id: "1c"
+        row: 1,
+        col: 3
     },
     {
         isBlack: false,
-        id: "1d"
+        row: 1,
+        col: 4
     },
     {
         isBlack: true,
-        id: "1e"
+        row: 1,
+        col: 5
     },
     {
         isBlack: false,
-        id: "1f"
+        row: 1,
+        col: 6
     },
     {
         isBlack: true,
-        id: "1g"
+        row: 1,
+        col: 7
     },
     {
         isBlack: false,
-        id: "1h"
+        row: 1,
+        col: 8
     }
 ];

@@ -101,11 +101,16 @@ h1 {
 .chess-board {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
     border: 2px solid black;
+    width: 30rem;
+    height: 30rem;
 }
 .square {
-    width: 3rem;
-    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
 }
 .sq-white {
     background-color: white;
