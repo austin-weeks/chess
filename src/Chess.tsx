@@ -1,11 +1,13 @@
-import {boardArr} from "./squares.ts"
+import {boardArr, square} from "./squares.ts"
 import {PieceType, whitePieces, blackPieces, chessPiece} from "./pieces.ts"
 import { useEffect, useState } from "react";
+import { canMove } from "./canMove.tsx";
 
 interface GrabState {
     pieceIsGrabbed: boolean
     grabbedPiece: chessPiece | undefined
 }
+enum GameWinState { None, White, Black }
 
 function Chess() {
     const startingGrabState: GrabState = {
@@ -14,40 +16,46 @@ function Chess() {
     }
     const [grabbedState, setGrabbedState] = useState(startingGrabState);
     const [isWhiteTurn, setTurn] = useState(true);
+    const [winState, setWinState] = useState(GameWinState.None);
 
-    function canMove(row: number, col: number): boolean {
-        return true;
-    }
 
-    const onClick = (row:number, col: number, hasPiece: boolean) => {
+    const onUserClick = (square: square, sqPiece: chessPiece | undefined) => {
+        //User is holding a chess piece.
         if (grabbedState.pieceIsGrabbed) {
-            if (hasPiece) return;
-
-            if (canMove(row, col)) {
-                if (isWhiteTurn) {
-                    const piece = whitePieces.find(pc => pc === grabbedState.grabbedPiece);
-                        if (!piece) return;
-                    piece.row = row;
-                    piece.column = col;
-                }
-                else {
-                    const piece = blackPieces.find(pc => pc === grabbedState.grabbedPiece);
-                        if (!piece) return;
-                    piece.row = row;
-                    piece.column = col;
-
-                }
-
+            let heldPiece;
+            if (isWhiteTurn) {
+                heldPiece = whitePieces.find(pc => pc === grabbedState.grabbedPiece);
+                if (!heldPiece) return;
+            } else {
+                heldPiece = blackPieces.find(pc => pc === grabbedState.grabbedPiece);
+                if (!heldPiece) return;
+            }
+            
+            if (canMove(square, heldPiece)) {
+                heldPiece.column = square.col;
+                heldPiece.row = square.row;
                 setGrabbedState(startingGrabState);
+                
+                //Deleting captured pieces.
+                if (sqPiece) {
+                    if (sqPiece.pieceType === PieceType.King) {
+                        setWinState(isWhiteTurn ? GameWinState.White : GameWinState.Black);
+                    }
+                    sqPiece.row = 0;
+                    sqPiece.column = 0;
+                }
+                //Setting Turn info
                 setTurn(prev => !prev);
-            } else alert("That is not a valid move! Try moving your piece to a different square.");
+            } else return;
         }
+        //User is selecting a chess piece.
         else {
-            if (!hasPiece) return;
+            if (!sqPiece) return;
 
             let chessPiece;
-            if (isWhiteTurn) chessPiece = whitePieces.find(pc => pc.row === row && pc.column === col);
-            else chessPiece = blackPieces.find(pc => pc.row === row && pc.column === col);
+            if (isWhiteTurn) chessPiece = whitePieces.find(pc => pc.row === square.row && pc.column === square.col);
+            else chessPiece = blackPieces.find(pc => pc.row === square.row && pc.column === square.col);
+            if (!chessPiece) return;
 
             setGrabbedState({
                 pieceIsGrabbed: true,
@@ -60,42 +68,37 @@ function Chess() {
 
     return (
         <>
-        <div>Current Turn: {isWhiteTurn ? "White" : "Black"}</div><br />
-
+        <GameState isWhiteTurn={isWhiteTurn} winState={winState} />
         <div className="chess-board">
             <MovingPiece showPiece={grabbedState.pieceIsGrabbed}
                 icon={getIcon(grabbedState.grabbedPiece)} />
-            {boardArr.map(sq => {
+                {boardArr.map(sq => {
+                    let piece = whitePieces.find(pc => pc.row === sq.row && pc.column === sq.col);
+                    if (!piece) piece = blackPieces.find(pc => pc.row === sq.row && pc.column === sq.col);
 
-                let piece = whitePieces.find(pc => pc.row === sq.row && pc.column === sq.col);
-                if (!piece) piece = blackPieces.find(pc => pc.row === sq.row && pc.column === sq.col);
-
-                return (
-                    <Square isWhiteTurn={isWhiteTurn}
-                        grabbedState={grabbedState}
-                        onclick={onClick}
-                        isBlackSquare={sq.isBlack}
-                        row={sq.row} column={sq.col}
-                        piece={piece}
-                    />
-                );
-            })}
+                    return (
+                        <Square isWhiteTurn={isWhiteTurn}
+                            grabbedState={grabbedState}
+                            onclick={onUserClick}
+                            square={sq}
+                            piece={piece}
+                        />
+                    );
+                })}
         </div>
         </>
     );
 }
 
 interface SquareProps {
-    isBlackSquare: boolean
-    row: number,
-    column: number,
+    square: square
     piece: chessPiece | undefined
     onclick: any;
     isWhiteTurn: boolean
     grabbedState: GrabState
 }
-function Square({ isBlackSquare, row, column, piece, onclick, isWhiteTurn, grabbedState }: SquareProps) {
-    const id = `${row}-${column}`
+function Square({ square, piece, onclick, isWhiteTurn, grabbedState }: SquareProps) {
+    const id = `${square.row}-${square.col}`
 
     function selectable(): boolean {
         if (!piece) return false;
@@ -108,12 +111,14 @@ function Square({ isBlackSquare, row, column, piece, onclick, isWhiteTurn, grabb
         else return true;
     }
 
+    square.empty = !showPiece();
+
     return (
-        <div onClick={() => onclick(row, column, showPiece())}
+        <div onClick={() => onclick(square, piece)}
             style={selectable() ? {cursor: "pointer"} : {}}
             id={id}
             key={id}
-            className={isBlackSquare ? "square sq-black" : "square sq-white"} >
+            className={square.isBlack ? "square sq-black" : "square sq-white"} >
             {showPiece() && getIcon(piece)}
         </div>
     );
@@ -144,7 +149,6 @@ function MovingPiece({ icon, showPiece }: MovingPieceProps) {
     })
     useEffect(() => {
         const move = (e: MouseEvent) => {
-            console.log(e);
             var x = e.pageX;
             var y = e.pageY;
             setStyle({
@@ -163,6 +167,28 @@ function MovingPiece({ icon, showPiece }: MovingPieceProps) {
             {icon}
         </div>
     );
+}
+
+interface GameStateProps {
+    winState: GameWinState
+    isWhiteTurn: boolean
+}
+function GameState({ winState, isWhiteTurn }: GameStateProps) {
+    if (winState === GameWinState.None) {
+        return (
+            <>
+                <div>{isWhiteTurn ? "White's Turn" : "Black's Turn"}</div>
+                <br />
+            </>
+        );
+    } else {
+        return (
+            <>
+                <div>{winState === GameWinState.White ? "White Won!" : "Black Won!"}</div>
+                <br />
+            </>
+        );
+    }
 }
 
 export default Chess;
