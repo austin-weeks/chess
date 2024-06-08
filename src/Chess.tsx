@@ -31,7 +31,8 @@ function Chess() {
                 if (!heldPiece) return;
             }
             
-            if (canMove(square, heldPiece)) {
+            if (heldPiece.color === sqPiece?.color) return;
+            if (canMove(square, heldPiece, boardArr)) {
                 heldPiece.column = square.col;
                 heldPiece.row = square.row;
                 setGrabbedState(startingGrabState);
