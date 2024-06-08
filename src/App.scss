@@ -118,3 +118,10 @@ h1 {
 .sq-black {
     background-color: grey;
 }
+
+.hover {
+    pointer-events: none;
+    position: absolute;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
