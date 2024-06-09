@@ -289,7 +289,8 @@ interface CapturedPiecesProps {
 }
 function CapturedPieces({pieces, isWhite}: CapturedPiecesProps) {
     return (
-        <div className="captured-pieces" style={isWhite ? {} : {flexDirection: "column-reverse"}}>
+        <div className="captured-pieces" style={isWhite ? {} : {flexBasis}}>
+            <div className={isWhite ? "captured-inner" : "captured-inner inner-reverse"}>
             {pieces.sort((a, b) => a.pieceType - b.pieceType).map(pc => {
                 return getIcon(pc);
             })}
