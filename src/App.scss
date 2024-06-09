@@ -145,6 +145,10 @@ $soft-black: #242424;
     flex-direction: column;
     gap: 0.15em;
     color: $soft-black;
+
+    @media (prefers-color-scheme: dark) {
+        color: rgba(255, 255, 255, 0.87);
+    }
 }
 .game-display {
     display: flex;

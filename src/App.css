@@ -166,6 +166,11 @@ h1 {
   gap: 0.15em;
   color: #242424;
 }
+@media (prefers-color-scheme: dark) {
+  .captured-pieces {
+    color: rgba(255, 255, 255, 0.87);
+  }
+}
 
 .game-display {
   display: flex;
