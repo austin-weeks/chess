@@ -288,8 +288,8 @@ interface CapturedPiecesProps {
     isWhite: boolean
 }
 function CapturedPieces({pieces, isWhite}: CapturedPiecesProps) {
-    if (pieces.length === 1) return (<></>);
-    
+    if (pieces.length === 0) return (<></>);
+
     return (
         <div className="captured-pieces" style={isWhite ? {} : {justifyContent: "flex-end"}}>
             <div className={isWhite ? "captured-inner" : "captured-inner inner-reverse"}>
