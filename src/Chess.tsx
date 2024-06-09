@@ -14,10 +14,6 @@ TODO
 
 - rework for performance? 
     - currently entire board re-renders every click
-
-- pawn to queen transformation
-
-BUG - black pawns could move backwards one space
 */
 
 
