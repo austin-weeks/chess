@@ -288,15 +288,14 @@ interface CapturedPiecesProps {
     isWhite: boolean
 }
 function CapturedPieces({pieces, isWhite}: CapturedPiecesProps) {
-    if (pieces.length === 0) return (<></>);
-
     return (
         <div className="captured-pieces" style={isWhite ? {} : {justifyContent: "flex-end"}}>
+            {pieces.length > 0 &&
             <div className={isWhite ? "captured-inner" : "captured-inner inner-reverse"}>
                 {pieces.sort((a, b) => a.pieceType - b.pieceType).map(pc => {
                     return getIcon(pc);
                 })}
-            </div>
+            </div>}
         </div>
     );
 }
