@@ -1,0 +1,41 @@
+.info-btn {
+    position: fixed;
+    bottom: .5rem;
+    right: .5rem;
+    background-color: white;
+    border: 4.5px solid black;
+    border-radius: 100%;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+}
+.info-btn:hover {
+    transform: scale(1.05);
+}
+
+.info-panel {
+    background-color: rgb(20, 25, 31);
+    color: white;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    /* box-shadow: 0 0 8px rgb(131, 131, 131); */
+    width: 100vw;
+    padding: 1em 3em 1em 1em;
+
+}
+.close-btn {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.5rem;
+    color: white;
+}
+.close-btn:hover {
+    background-color: rgb(80, 147, 253);
+    border-radius: 40%;
+    cursor: pointer;
+}
