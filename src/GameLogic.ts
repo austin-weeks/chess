@@ -4,7 +4,16 @@ import { square } from "./squares";
 export function canMove(tarSqr: square, piece: chessPiece, board: square[]): boolean {
     const collisionPassed = checkCollision(tarSqr, piece, board);
     switch (piece.pieceType) {
-        case PieceType.Pawn: return collisionPassed && canPawnMove(tarSqr, piece);
+        case PieceType.Pawn:
+            if (collisionPassed && canPawnMove(tarSqr, piece)) {
+                if (piece.color === "white") {
+                    if (tarSqr.row === 8) piece.pieceType = PieceType.Queen;
+                }
+                else {
+                    if (tarSqr.row === 1) piece.pieceType = PieceType.Queen;
+                }
+                return true;
+            } else return false;
         case PieceType.Rook: return collisionPassed && canRookMove(tarSqr, piece);
         case PieceType.Bishop: return collisionPassed && canBishopMove(tarSqr, piece);
         case PieceType.Queen: return collisionPassed && canQueenMove(tarSqr, piece);
@@ -24,13 +33,18 @@ function canPawnMove(tarSqr: square, piece: chessPiece): boolean {
         if (piece.color === "black") {
             const startingBlackRow = 7;
             range = piece.row === startingBlackRow ? 2 : 1;
-            return piece.row - tarSqr.row <= range;
+            console.log({
+                pieceRow: piece.row,
+                targetRow: tarSqr.row,
+                range,
+            });
+            return tarSqr.row < piece.row && tarSqr.row >= piece.row - range;
         }
         //White Piece
         else {
             const startingWhiteRow = 2;
             range = piece.row === startingWhiteRow ? 2 : 1;
-            return tarSqr.row - piece.row <= range;
+            return tarSqr.row > piece.row && tarSqr.row <= piece.row + range;
         }
     }
     //Capturing a piece

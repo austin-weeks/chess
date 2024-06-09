@@ -86,14 +86,18 @@ h1 {
     text-align: center;
 }
 $soft-black: #242424;
+$soft-white: rgba(255, 255, 255, 0.87);
 .chess-board {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
-    border: 3px solid $soft-black;
     border-radius: 4px;
     width: 30rem;
     height: 30rem;
+    border: 3px solid $soft-black;
+    @media (prefers-color-scheme: dark) {
+        border: 2px solid rgba(255, 255, 255, 0.87);
+    }
 
     overflow-x: hidden;
     overflow-y: hidden;
@@ -135,20 +139,33 @@ $soft-black: #242424;
     border-radius: 5px;
     padding: .2em .5em;
     cursor: pointer;
+    @media (prefers-color-scheme: dark) {
+        border: 2px solid rgba(255, 255, 255, 0.87);
+    }
 }
 .captured-pieces {
     width: 2.5rem;
-    padding: .5em 0;
     font-size: 1.6rem;
-
+    margin: 0 0.2em;
+    
     display: flex;
     flex-direction: column;
-    gap: 0.15em;
     color: $soft-black;
-
+    position: relative;
+    
+}
+.captured-inner {
     @media (prefers-color-scheme: dark) {
-        color: rgba(255, 255, 255, 0.87);
+        background-color: $soft-white;
+        border-radius: 0.3em;
     }
+    display: flex;
+    flex-direction: column;
+    padding: .5em 0;
+    gap: 0.15em;
+}
+.inner-reverse {
+    flex-direction: column-reverse;
 }
 .game-display {
     display: flex;

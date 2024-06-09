@@ -106,12 +106,17 @@ h1 {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
-  border: 3px solid #242424;
   border-radius: 4px;
   width: 30rem;
   height: 30rem;
+  border: 3px solid #242424;
   overflow-x: hidden;
   overflow-y: hidden;
+}
+@media (prefers-color-scheme: dark) {
+  .chess-board {
+    border: 2px solid rgba(255, 255, 255, 0.87);
+  }
 }
 
 .square {
@@ -156,20 +161,37 @@ h1 {
   padding: 0.2em 0.5em;
   cursor: pointer;
 }
+@media (prefers-color-scheme: dark) {
+  .btn {
+    border: 2px solid rgba(255, 255, 255, 0.87);
+  }
+}
 
 .captured-pieces {
   width: 2.5rem;
-  padding: 0.5em 0;
   font-size: 1.6rem;
+  margin: 0 0.2em;
   display: flex;
   flex-direction: column;
-  gap: 0.15em;
   color: #242424;
+  position: relative;
+}
+
+.captured-inner {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em 0;
+  gap: 0.15em;
 }
 @media (prefers-color-scheme: dark) {
-  .captured-pieces {
-    color: rgba(255, 255, 255, 0.87);
+  .captured-inner {
+    background-color: rgba(255, 255, 255, 0.87);
+    border-radius: 0.3em;
   }
+}
+
+.inner-reverse {
+  flex-direction: column-reverse;
 }
 
 .game-display {

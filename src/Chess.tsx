@@ -14,6 +14,10 @@ TODO
 
 - rework for performance? 
     - currently entire board re-renders every click
+
+- pawn to queen transformation
+
+BUG - black pawns could move backwards one space
 */
 
 
@@ -289,11 +293,12 @@ interface CapturedPiecesProps {
 }
 function CapturedPieces({pieces, isWhite}: CapturedPiecesProps) {
     return (
-        <div className="captured-pieces" style={isWhite ? {} : {flexBasis}}>
+        <div className="captured-pieces" style={isWhite ? {} : {justifyContent: "flex-end"}}>
             <div className={isWhite ? "captured-inner" : "captured-inner inner-reverse"}>
-            {pieces.sort((a, b) => a.pieceType - b.pieceType).map(pc => {
-                return getIcon(pc);
-            })}
+                {pieces.sort((a, b) => a.pieceType - b.pieceType).map(pc => {
+                    return getIcon(pc);
+                })}
+            </div>
         </div>
     );
 }
