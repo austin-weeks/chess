@@ -1,3 +1,5 @@
-# Chess Game
+# ♟️ Chess
 
-A simple chess app built with React and TypeScript.
+My implementation of chess! Play it [here](https://austin-weeks.github.io/chess).
+
+<picture>![](/chess-preview.png)</picture>
